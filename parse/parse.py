@@ -10,6 +10,7 @@ class Parser:
     self.__soup = BeautifulSoup(content, 'html.parser')
   
   def __get_page_title(self):
+    print(self.__soup)
     if self.__soup.title.string:
       return self.__soup.title.string
     return None

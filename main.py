@@ -1,3 +1,3 @@
 from spyder import Spyder
 
-spyder = Spyder(headstart='https://imdeepmind.com')
+spyder = Spyder(headstart='https://instagram.com/imdeepmind/')
