@@ -10,10 +10,8 @@ class Spyder:
     fetcher = Fetcher(self.headstart)
     html = fetcher.fetch()
 
-    print(html)
-
     # Extract the contents of the page
-    # parser = Parser(html)
-    # content = parser.parse()
+    parser = Parser(html)
+    content = parser.parse()
 
-    # print(content)
+    print(content)
