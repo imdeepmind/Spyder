@@ -1,3 +1,4 @@
+import re
 from bs4 import BeautifulSoup
 
 class Parser:
@@ -15,13 +16,21 @@ class Parser:
       return title
     return None
   
+  def __check_link(self, url):
+    return re.match('https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+', url)
+
+  def __remove_duplicate_links(self, links):
+    return list(set(links))
+
   def __get_page_links(self):
     page_links = []
 
     for link in self.__soup.find_all('a'):
-      page_links.append(link.get('href'))
+      href = link.get('href')
+      if self.__check_link(href):
+        page_links.append(href)
     
-    return page_links
+    return self.__remove_duplicate_links(page_links)
 
   def parse(self):
     return {
