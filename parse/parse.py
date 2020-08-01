@@ -1,5 +1,9 @@
 import re
 from bs4 import BeautifulSoup
+import spacy
+
+sp = spacy.load('en_core_web_sm')
+all_stopwords = sp.Defaults.stop_words
 
 class Parser:
   def __init__(self, content):
@@ -32,15 +36,34 @@ class Parser:
     
     return self.__remove_duplicate_links(page_links)
 
+  def __get_keywords(self):
+    page_text = self.__soup.get_text()
+
+    # word tokenizing
+    words = page_text.split(' ')
+
+    # removing stop words
+    words_without_sw= [word for word in words if not word in all_stopwords]
+
+    # Building the word frequency dict
+    word_dict = {}
+    for word in words_without_sw:
+      if word in word_dict:
+        word_dict[word] += 1
+      else:
+        word_dict[word] = 1
+    
+    filtered_words = []
+    for word in word_dict:
+      if word_dict[word] >= 3:
+        filtered_words.append(word)
+
+    return filtered_words
+
   def parse(self):
     return {
       'title': self.__get_page_title(),
       'description': self.__get_page_description(),
       'links': self.__get_page_links(),
-      'keywords': [ # TODO: Need to work on extracting keywords
-        {
-          'keyword': 'test',
-          'freq': 5
-        }
-      ]
+      'keywords': self.__get_keywords()
     }
