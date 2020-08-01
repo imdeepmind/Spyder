@@ -19,22 +19,16 @@ class Parser:
     if title:
       return title
     return None
-  
-  def __check_link(self, url):
-    return re.match('https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+', url)
-
-  def __remove_duplicate_links(self, links):
-    return list(set(links))
 
   def __get_page_links(self):
     page_links = []
 
     for link in self.__soup.find_all('a'):
       href = link.get('href')
-      if self.__check_link(href):
+      if re.match('https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+', href):
         page_links.append(href)
     
-    return self.__remove_duplicate_links(page_links)
+    return list(set(page_links))
 
   def __get_keywords(self):
     page_text = self.__soup.get_text()
