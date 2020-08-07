@@ -1,3 +1,7 @@
-from spyder import Spyder
+from schedular import Schedular
 
-spyder = Spyder(headstart='https://instagram.com/imdeepmind/')
+from test import print_name
+
+schedular = Schedular(print_name)
+
+schedular.add("abhi")
