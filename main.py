@@ -1,7 +1,7 @@
-from schedular import Schedular
+from flask import Flask
 
-from test import print_name
+app = Flask(__name__)
 
-schedular = Schedular(print_name)
-
-schedular.add("abhi")
+@app.route('/')
+def spyder_works():
+    return 'Spyder Works!!!'
