@@ -1,6 +1,8 @@
 from os import getenv
 from flask import Flask
 
+from db import db
+
 app = Flask(__name__)
 
 app.config['ENV'] = getenv("PYTHON_ENV")
