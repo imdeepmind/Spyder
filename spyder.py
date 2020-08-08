@@ -1,4 +1,4 @@
-def generate_web():
+def generate_web(headstart):
   print("Generating the web...")
 
 

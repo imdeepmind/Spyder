@@ -1,3 +1,4 @@
+import re
 from os import getenv
 from flask import Flask, request, make_response
 from time import strftime
@@ -19,7 +20,11 @@ def spyder_works():
 @app.route("/start", methods=["POST"])
 def start_web():
     data = request.json
-    generate_web()
+
+    if not "headstart" in data or not re.match('https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+', data["headstart"]):
+        return make_response(send_resp(400, "Please provide a headstart"), 400)    
+    
+    generate_web(data["headstart"])
 
     return make_response(send_resp(200, "Started generating web"), 200)
 
