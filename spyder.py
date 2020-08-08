@@ -1,27 +1,32 @@
-from parse import Parser
-from fetcher import Fetcher
+def generate_web():
+  print("Generating the web...")
 
 
-class Spyder:
-  def __init__(self, headstart='https://imdeepmind.com'):
-    self.headstart = headstart
 
-    self.__run()
+# from parse import Parser
+# from fetcher import Fetcher
 
-  def __run(self, url=None):
-    # Fetch the page
-    if url:
-      fetcher = Fetcher(url)
-    else:
-      fetcher = Fetcher(self.headstart)
-    html = fetcher.fetch()
 
-    # Extract the contents of the page
-    parser = Parser(html)
-    content = parser.parse()
+# class Spyder:
+#   def __init__(self, headstart='https://imdeepmind.com'):
+#     self.headstart = headstart
 
-    print(content)
+#     self.__run()
 
-    for link in content["links"]:
-      self.__run(link)
+#   def __run(self, url=None):
+#     # Fetch the page
+#     if url:
+#       fetcher = Fetcher(url)
+#     else:
+#       fetcher = Fetcher(self.headstart)
+#     html = fetcher.fetch()
+
+#     # Extract the contents of the page
+#     parser = Parser(html)
+#     content = parser.parse()
+
+#     print(content)
+
+#     for link in content["links"]:
+#       self.__run(link)
 
